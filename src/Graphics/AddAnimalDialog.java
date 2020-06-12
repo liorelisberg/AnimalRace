@@ -29,7 +29,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     private String animalName; // name of animal , example:REX
     String animalFamilyType; // king of animal, example: Air Animal
     String animalKind; // kind of animal , example: Dog
-    private String animalImgPath; //animal image path, example:
 
     /**
      * AddAnimalDialog constructor.
@@ -63,7 +62,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
 
         this.setVisible(true);
     }
-    
+
     /**
      * Detects a preformed action on this frame's components.
      *
@@ -127,10 +126,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
      */
     private void showImage() {
         this.animalKind = (String) animals_jcb.getSelectedItem();
-        this.animalImgPath = getClass().getResource("/" + animalKind + "E.png").getPath();
 
         try {
-            ImageIcon imageIcon = new ImageIcon(animalImgPath); // load the image to a imageIcon
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/" + animalKind + "E.png")); // load the image to a imageIcon
             Image image = imageIcon.getImage(); // transform it
             Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
             imageIcon = new ImageIcon(newImg);// transform it back
@@ -172,7 +170,4 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         return animalKind;
     }
 
-    public String getAnimalImgPath() {
-        return animalImgPath;
-    }
 }
