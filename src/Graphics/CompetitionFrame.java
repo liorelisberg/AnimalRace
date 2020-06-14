@@ -168,7 +168,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             }
 
         } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
-            addAnimalDialog = new AddAnimalDialog(this, "Add Animal ");
+            addAnimalDialog = new AddAnimalDialog(this, "Add Animal ", chosenCompetition, "Regular");
             addAnimalDialog.getCreateBtn().addActionListener(this);
 
         } else if (e.getSource() == addAnimalDialog.getCreateBtn()) { //if create button is activated
@@ -252,21 +252,17 @@ public class CompetitionFrame extends JFrame implements ActionListener {
     private void updateAnimalLocationPostClr() {
         String animalsType = chosenCompetition.contains("Water") ? "waterAnimals" : "otherAnimals";
         switch (animalsType) {
-            case "waterAnimals":
+            case "waterAnimals" -> {
                 waterCurrentPosition--;
-
                 for (int i = 0; i < animalVector.size(); i++)
                     animalVector.get(i).setPosition(startPointWater[i]);
-                break;
-
-            case "otherAnimals":
-
+            }
+            case "otherAnimals" -> {
                 if (chosenCompetition.contains("Air")) airCurrentPosition--;
                 else terCurrentPosition--;
-
                 for (int i = 0; i < animalVector.size(); i++)
                     animalVector.get(i).setPosition(startPoint[i]);
-                break;
+            }
         }
     }
 
@@ -387,48 +383,42 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     private void updateBtnStatus() {
         switch (gameState) {
-            case CHOOSING_COMP_TYPE: {
+            case CHOOSING_COMP_TYPE -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_FIRST_ANIMAL: {
+            case CHOOSING_COMP_FIRST_ANIMAL -> {
                 competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            case CHOOSING_COMP_ANIMALS: {
+            case CHOOSING_COMP_ANIMALS -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
             }
-            break;
-            case COMPETING: {
+            case COMPETING -> {
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(false);
             }
-            break;
-            case CLEARED: {
+            case CLEARED -> {
                 competitionPanel.getCompetitionToolbar().getCompetitionBtn().setEnabled(true);
                 competitionPanel.getCompetitionToolbar().getClearBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getInfoBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getAddAnimalBtn().setEnabled(false);
                 competitionPanel.getCompetitionToolbar().getEatBtn().setEnabled(false);
             }
-            break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + gameState);
+            default -> throw new IllegalStateException("Unexpected value: " + gameState);
         }
     }
 
