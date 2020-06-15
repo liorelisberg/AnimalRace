@@ -142,14 +142,14 @@ public class CompetitionFrame extends JFrame implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
+        Object chosen_action = e.getSource();
 
-        if (e.getSource() == competitionPanel.getCompetitionToolbar().getExitBtn()) // exit button chosen
+        if (chosen_action == competitionPanel.getCompetitionToolbar().getExitBtn()) // exit button chosen
             System.exit(0);
-        else if (e.getSource() == competitionPanel.getCompetitionToolbar().getInfoBtn()) // info button chosen
-        {
+        else if (chosen_action == competitionPanel.getCompetitionToolbar().getInfoBtn()) // info button chosen
             createInfoTable();
 
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getEatBtn()) // info button chosen
+        else if (chosen_action == competitionPanel.getCompetitionToolbar().getEatBtn()) // info button chosen
         {
             for (Animal animal : animalVector) {
                 int newX = animal.getPosition().getX() + 30;
@@ -157,21 +157,23 @@ public class CompetitionFrame extends JFrame implements ActionListener {
                 Point nextPoint = new Point(newX, newY);
                 animal.move(nextPoint);
             }
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getClearBtn()) {// clear button chosen
+        } else if (chosen_action == competitionPanel.getCompetitionToolbar().getClearBtn()) { // clear button chosen
             clearCalled();
 
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {// competition button chosen
+        } else if (chosen_action == competitionPanel.getCompetitionToolbar().getCompetitionBtn()) {  // competition button chosen
             chosenCompetition = ActionMessageDialog.chooseCompTypeDialog(this);
             if (chosenCompetition != null) {
                 gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
                 updateBtnStatus();
             }
 
-        } else if (e.getSource() == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
+        } else if (chosen_action == competitionPanel.getCompetitionToolbar().getAddAnimalBtn()) {
             addAnimalDialog = new AddAnimalDialog(this, "Add Animal ", chosenCompetition, "Regular");
             addAnimalDialog.getCreateBtn().addActionListener(this);
 
-        } else if (e.getSource() == addAnimalDialog.getCreateBtn()) { //if create button is activated
+        } else if (chosen_action == addAnimalDialog.getCreateBtn()) { //if create button is activated
+
+            System.out.println("im in competitionFrame");
             String animalType = addAnimalDialog.getAnimalFamilyType();
             createAnimalByType(animalType);
             addAnimalDialog.dispose();
@@ -214,7 +216,6 @@ public class CompetitionFrame extends JFrame implements ActionListener {
 
             if (animalVector.isEmpty())
                 gameState = GameState.CHOOSING_COMP_FIRST_ANIMAL;
-
             else
                 gameState = GameState.CHOOSING_COMP_ANIMALS;
         }

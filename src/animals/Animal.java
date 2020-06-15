@@ -145,7 +145,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
      * @see Medal
      */
     protected boolean setName(String name) {
-        if (name.length() > 0) {
+        if (name != null) {
             this.name = name;
             return true;
         }
