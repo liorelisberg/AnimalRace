@@ -17,9 +17,9 @@ import java.util.Enumeration;
 public class AddAnimalDialog extends JDialog implements ActionListener {
     GridBagConstraints gbc = new GridBagConstraints();
 
-    private String[] waterAnimals = {"dolphin1", "dolphin2", "dolphin3", "whale1", "whale2", "alligator1", "alligator2"};
-    private String[] airAnimals = {"eagle1", "eagle2", "eagle3", "pigeon1"};
-    private String[] terAnimals = {"dog1", "dog2", "dog3", "dog4", "dog5", "dog6", "cat1", "cat2", "snake1", "snake2", "snake3", "alligator3"};
+    private final String[] waterAnimals = {"dolphin1", "dolphin2", "dolphin3", "whale1", "whale2", "alligator1", "alligator2"};
+    private final String[] airAnimals = {"eagle1", "eagle2", "eagle3", "pigeon1"};
+    private final String[] terAnimals = {"dog1", "dog2", "dog3", "dog4", "dog5", "dog6", "cat1", "cat2", "snake1", "snake2", "snake3", "alligator3"};
 
     private JLabel nameLabel = new JLabel("Animal Name :");
     private JLabel imageLabel = new JLabel("Animal Type :");
@@ -27,9 +27,9 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     private JLabel speedLabel = new JLabel("Speed :");
     private JLabel engLabel = new JLabel("Energy Consumpt :");
     private JLabel imgChoiceLabel = new JLabel("Animal Icon :");
-    private JLabel imgLabel;
+    private final JLabel imgLabel;
 
-    private JTextField nameTextField = new JTextField();
+    private final JTextField nameTextField = new JTextField();
     private final JComboBox<String> imageCbox = new JComboBox<>();
     private final JRadioButton maleBtn = new JRadioButton("Male");
     private final JRadioButton femaleBtn = new JRadioButton("Female");
@@ -154,7 +154,6 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         maleBtn.addActionListener(this);
         hermaBtn.addActionListener(this);
         femaleBtn.addActionListener(this);
-        createBtn.addActionListener(this);
 
         speedSlider.setMajorTickSpacing(1);
         speedSlider.setPaintTicks(true);
@@ -277,10 +276,5 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     public gen getGender() {
         return gender;
     }
-
-
-    //        public static void main (String[]args){
-//            new AddAnimalDialog(new JFrame(), "Add Animal ", "Air animals", "Regular");
-//        }
 
 }

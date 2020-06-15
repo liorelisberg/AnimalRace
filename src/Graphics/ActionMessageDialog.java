@@ -1,11 +1,14 @@
 package Graphics;
 
 import javax.swing.*;
+import java.awt.*;
+import java.util.TimerTask;
 
 /**
  * Creates a JDialog object.
  */
 public class ActionMessageDialog {
+    private int index = 3;
 
     //just a test message when competition is over
     public static void ShowVictoryDialog(CompetitionFrame frame, String goldName, String silverName, String bronzeName) {
@@ -71,5 +74,41 @@ public class ActionMessageDialog {
                 JOptionPane.WARNING_MESSAGE);
     }
 
+    public void startCompetitionDialog(CompetitionFrame frame) {
+        JFrame f = new JFrame();
+        f.setSize(new Dimension(150, 150));
+        f.setUndecorated(true);
+        centreWindow(f);
+        JPanel p = new JPanel();
+        JLabel lbl = new JLabel();
+        JButton b = new JButton("3");
 
+        new java.util.Timer().schedule(new TimerTask() {
+            @Override
+
+            public void run() {
+                f.add(p);
+                p.add(b);
+                if (index >= 0) {
+                    System.out.println(index);
+                    f.setVisible(true);
+                    b.setIcon(new ImageIcon(ActionMessageDialog.class.getResource("/start" + index-- + ".png")));
+                    p.validate();
+                } else {
+                    cancel();
+                    f.dispose();
+                }
+            }
+        }, 1000, 1000);
+    }
+
+    public static void centreWindow(Window frame) {
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (int) ((dimension.getWidth() - frame.getWidth()) / 4);
+        int y = (int) ((dimension.getHeight() - frame.getHeight()) / 2);
+        frame.setLocation(x, y);
+    }
 }
+
+
+

@@ -9,12 +9,13 @@ import java.awt.*;
  */
 public class CompetitionToolbar extends JPanel {
 
-    private final JButton competitionBtn;
-    private final JButton addAnimalBtn;
-    private final JButton clearBtn;
-    private final JButton eatBtn;
-    private final JButton infoBtn;
     private final JButton exitBtn;
+    private final JButton infoBtn;
+    private final JButton eatBtn;
+    private final JButton clearBtn;
+    private final JButton addAnimalBtn;
+    private final JButton competitionBtn;
+    private final JButton startBtn;
 
     /**
      * CompetitionToolbar constructor.
@@ -28,7 +29,13 @@ public class CompetitionToolbar extends JPanel {
         Border outBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         setBorder(BorderFactory.createCompoundBorder(outBorder, innedBorder));
 
-        Dimension btnSize = new Dimension(156, 30);
+        Dimension btnSize = new Dimension(133, 30);
+
+        startBtn = new JButton("Start");
+        startBtn.setBackground(Color.RED);
+        startBtn.setForeground(Color.white);
+        startBtn.setFont(new java.awt.Font("Arial", Font.BOLD, 20));
+        startBtn.setPreferredSize(btnSize);
 
         competitionBtn = new JButton("Competition");
         competitionBtn.setPreferredSize(btnSize);
@@ -43,6 +50,7 @@ public class CompetitionToolbar extends JPanel {
         exitBtn = new JButton("Exit");
         exitBtn.setPreferredSize(btnSize);
 
+        add(startBtn);
         add(competitionBtn);
         add(addAnimalBtn);
         add(clearBtn);
@@ -75,5 +83,7 @@ public class CompetitionToolbar extends JPanel {
         return infoBtn;
     }
 
-
+    public JButton getStartBtn() {
+        return startBtn;
+    }
 }

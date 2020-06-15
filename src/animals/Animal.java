@@ -10,7 +10,6 @@ import mobility.Point;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 /**
@@ -170,19 +169,14 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
             this.northImg = ImageIO.read(getClass().getResource("/" + nm + "N.png"));
             this.southImg = ImageIO.read(getClass().getResource("/" + nm + "S.png"));
 
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             try {
-                System.out.println("reach to catch"); //todo delete line
-                this.eastImg = ImageIO.read(new File(PICTURE_PATH + nm + "E.png"));
-                this.westImg = ImageIO.read(new File(PICTURE_PATH + nm + "W.png"));
+                this.eastImg = ImageIO.read(getClass().getResource("/" + nm + "E.png"));
+                this.westImg = ImageIO.read(getClass().getResource("/" + nm + "W.png"));
 
             } catch (IOException ioException) {
                 ioException.printStackTrace();
             }
-
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
         }
     }
 
