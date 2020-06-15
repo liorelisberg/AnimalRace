@@ -10,7 +10,6 @@ import mobility.Point;
 public class Whale extends WaterAnimal {
 
     private static final String sound = "Splash";
-    private String foodType;
 
     /**
      * Creates Whale object with the given arguments.
@@ -20,37 +19,15 @@ public class Whale extends WaterAnimal {
      * @param position A given Point object of Whale'a object location in space.
      * @see gen,Medal,Point
      */
-    public Whale(String name,double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name,speed, position, pan, "whale", choice);
-        this.foodType = "ANYTHING !";
-    }
-
-
-    /**
-     * Sets this Whale's food type.
-     *
-     * @param food A given value that is used to initialize this food type.
-     * @return A boolean if the food type was initialized or not.
-     */
-    protected boolean setFoodType(String food) {
-        this.foodType = food;
-        return true;
-    }
-
-    /**
-     * Gets this Whale's object food type.
-     *
-     * @return the object's current food type.
-     */
-    public String getFoodType() {
-        return this.foodType;
+    public Whale(String name,double speed,int energy, gen gender,  Point position, CompetitionPanel pan, String choice) {
+        super(name,speed, energy, gender,  position, pan, "whale", choice);
     }
 
     /**
      * @return readable info of this Whale object.
      */
     public String toString() {
-        return super.toString() + "\nFood Type : " + this.foodType;
+        return super.toString();
     }
 
     /**

@@ -8,7 +8,6 @@ import mobility.Point;
  * Represents TerrestrialAnimal object
  */
 abstract public class TerrestrialAnimal extends Animal {
-    private int noLegs;
 
     /**
      * Creates TerrestrialAnimal object with the given arguments.
@@ -18,36 +17,9 @@ abstract public class TerrestrialAnimal extends Animal {
      * @param position A given Point object of TerrestrialAnimal's object location in space.
      * @see gen,Medal,Point
      */
-    public TerrestrialAnimal(String name,double speed,Point position, CompetitionPanel pan, String type, String choice) {
-        super(name, speed,position, pan, type, choice);
-        this.setNoLegs(4);
+    public TerrestrialAnimal(String name, double speed, int energy, gen gender, Point position, CompetitionPanel pan, String type, String choice) {
+        super(name, speed, energy, gender, position, pan, type, choice);
     }
-
-
-    /**
-     * Gets this TerrestrialAnimal's object noLegs.
-     *
-     * @return this object's noLegs.
-     */
-    public int getNoLegs() {
-        return this.noLegs;
-    }
-
-    /**
-     * Sets this TerrestrialAnimal's noLegs.
-     *
-     * @param legs A given value that is used to initialize this name.
-     * @return A boolean if the noLegs was initialized or not.
-     */
-    protected boolean setNoLegs(int legs) {
-        if (legs < 0) {
-            this.noLegs = 0;
-            return false;
-        }
-        this.noLegs = legs;
-        return true;
-    }
-
 
     /**
      * Makes this TerrestrialAnimal dive with a given Integer.

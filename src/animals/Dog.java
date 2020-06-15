@@ -4,15 +4,10 @@ import Graphics.CompetitionPanel;
 import Olympics.Medal;
 import mobility.Point;
 
-import java.awt.*;
-import java.awt.image.ImageObserver;
-import java.text.AttributedCharacterIterator;
-
 /**
  * Presents Dog object
  */
 public class Dog extends TerrestrialAnimal {
-    private final String breed;
     private static final String sound = "Woof Woof";
 
     /**
@@ -23,22 +18,9 @@ public class Dog extends TerrestrialAnimal {
      * @param position A given Point object of Dog's object location in space.
      * @see gen,Medal,Point
      */
-    public Dog(String name,double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name, speed, position, pan, "dog", choice);
-        this.breed = "breed";
-
-
+    public Dog(String name, double speed, int energy, gen gender, Point position, CompetitionPanel pan, String choice) {
+        super(name, speed, energy, gender, position, pan, "dog", choice);
         super.drawObject(this.pan.getG());
-    }
-
-
-    /**
-     * Gets this Dog object's breed.
-     *
-     * @return this object's breed.
-     */
-    public String getBreed() {
-        return breed;
     }
 
     /**
@@ -46,7 +28,7 @@ public class Dog extends TerrestrialAnimal {
      */
     @Override
     public String toString() {
-        return super.toString() + "\nbreed : " + this.getBreed();
+        return super.toString();
     }
 
     /**

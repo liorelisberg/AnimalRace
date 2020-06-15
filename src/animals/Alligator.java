@@ -10,7 +10,6 @@ import mobility.Point;
 public class Alligator extends TerrestrialAnimal implements IReptile {
 
     private static final String sound = "Roar";
-    private String AreaOfLiving;
     private final WaterAnimal waterAnimal;
 
     /**
@@ -21,40 +20,18 @@ public class Alligator extends TerrestrialAnimal implements IReptile {
      * @param position A given Point object of Alligator's object location in space.
      * @see gen,Medal,Point
      */
-    public Alligator(String name, double speed, Point position, CompetitionPanel pan, String choice) {
-        super(name, speed, position, pan, "alligator", choice);
-        waterAnimal = new WaterAnimal(name,  speed,  position, pan, "alligator", "alligator2") {
+    public Alligator(String name, double speed, int energy, gen gender, Point position, CompetitionPanel pan, String choice) {
+        super(name, speed, energy, gender, position, pan, "alligator", choice);
+        waterAnimal = new WaterAnimal(name, speed, energy, gender, position, pan, "alligator", "alligator2") {
             public String getSound() {
                 return sound;
             }
         };
         super.drawObject(super.pan.getG());
-
-        this.AreaOfLiving = "River";
     }
 
     public String getType() {
         return super.getType();
-    }
-
-    /**
-     * Sets this Alligator's length.
-     *
-     * @param area A given value that is used to initialize this AreaOfLiving.
-     * @return A boolean if the area was initialized or not.
-     */
-    protected boolean setAreaOfLiving(String area) {
-        this.AreaOfLiving = area;
-        return true;
-    }
-
-    /**
-     * Gets this Alligator object's AreaOfLiving.
-     *
-     * @return this object's AreaOfLiving.
-     */
-    public String getAreaOfLiving() {
-        return this.AreaOfLiving;
     }
 
     /**
@@ -77,13 +54,6 @@ public class Alligator extends TerrestrialAnimal implements IReptile {
     }
 
     /**
-     * @return readable info of this Alligator object.
-     */
-    public String toString() {
-        return super.toString() + "\nArea Of Living : " + this.AreaOfLiving;
-    }
-
-    /**
      * Gets this Alligator's object sound.
      *
      * @return this object's sound.
@@ -98,7 +68,7 @@ public class Alligator extends TerrestrialAnimal implements IReptile {
 
     @Override
     public boolean eat(int energy) {
-        if (energy <= 0 || energy >= super.maxEnergy) {
+        if (energy <= 0 || energy >= TerrestrialAnimal.maxEnergy) {
             return false;
         } else {
             super.setCurrentEnergy(energy);

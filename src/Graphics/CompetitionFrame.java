@@ -93,7 +93,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         int terStartY = 10; //terrestrial starting y
         int waterStartY = 90; //water starting y
 
-        for (int i = 0; i < maxAirAnimal; i++) { ////set air & terrestrial animals points
+        for (int i = 0; i < maxAirAnimal; i++) { //set air & terrestrial animals points
             startPoint[i] = new Point(5, terStartY);
             terStartY += heightDiff;
             if (i < maxNonAirAnimal) { //set water animals points
@@ -150,7 +150,7 @@ public class CompetitionFrame extends JFrame implements ActionListener {
             createInfoTable();
 
         else if (chosen_action == competitionPanel.getCompetitionToolbar().getEatBtn()) // info button chosen
-        {
+        { //todo - fix eat
             for (Animal animal : animalVector) {
                 int newX = animal.getPosition().getX() + 30;
                 int newY = animal.getPosition().getY();
@@ -338,9 +338,9 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         int startPointIndex = getPositionIndex();
 
         if (addAnimalDialog.getAnimalKind().contains("pigeon"))
-            animalVector.add(new Pigeon(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Pigeon(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("eagle"))
-            animalVector.add(new Eagle(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Eagle(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
 
         tempData.add(animalVector.get(airCurrentPosition).getAnimalInfo());
     }
@@ -353,13 +353,13 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         int startPointIndex = getPositionIndex();
 
         if (addAnimalDialog.getAnimalKind().contains("dog"))
-            animalVector.add(new Dog(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Dog(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("cat"))
-            animalVector.add(new Cat(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Cat(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("snake"))
-            animalVector.add(new Snake(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Snake(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("alligator"))
-            animalVector.add(new Alligator(name, speed, startPoint[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Alligator(name, speed, energy, gender, startPoint[startPointIndex], competitionPanel, kind));
         tempData.add(animalVector.get(terCurrentPosition).getAnimalInfo());
 
     }
@@ -371,11 +371,11 @@ public class CompetitionFrame extends JFrame implements ActionListener {
         int startPointIndex = getPositionIndex();
 
         if (addAnimalDialog.getAnimalKind().contains("alligator"))
-            animalVector.add(new Alligator(name, speed, startPointWater[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Alligator(name, speed, energy, gender, startPointWater[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("whale"))
-            animalVector.add(new Whale(name, speed, startPointWater[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Whale(name, speed, energy, gender, startPointWater[startPointIndex], competitionPanel, kind));
         else if (addAnimalDialog.getAnimalKind().contains("dolphin"))
-            animalVector.add(new Dolphin(name, speed, startPointWater[startPointIndex], competitionPanel, kind));
+            animalVector.add(new Dolphin(name, speed, energy, gender, startPointWater[startPointIndex], competitionPanel, kind));
         tempData.add(animalVector.get(waterCurrentPosition).getAnimalInfo());
 
     }

@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 /**
  * Represents animal object
@@ -20,18 +19,18 @@ import java.util.Random;
 public abstract class Animal extends Mobile implements IDrawable, IAnimal, Cloneable, ILocatable {
     private String name;
     private gen gender;
-    private double weight;
     private double speed;
     private Medal[] medals;
     protected String type;
 
+    protected static final int size = 65;
+    protected static final int maxEnergy = 100;
+
     protected int currentEnergy;
-    protected int size;
-    protected Orientation orientation;
-    protected int maxEnergy;
     protected int energyPerMeter;
-    protected CompetitionPanel pan;
+    protected Orientation orientation;
     protected BufferedImage eastImg, westImg, southImg, northImg;
+    protected CompetitionPanel pan;
 
     /**
      * Creates Animal object with the given arguments.
@@ -44,175 +43,86 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
      * @param type      A given animal type of Animal object.
      * @see gen,Medal,Point
      */
-    public Animal(String name, double speed, Point position, CompetitionPanel pan, String type, String imgChoice) {
+    public Animal(String name, double speed, int energyPerMeter, gen gender, Point position, CompetitionPanel pan, String type, String imgChoice) {
         super(position);
-        this.setName(name);
-        this.setGender(gender);
-        this.setWeight(weight);
-        this.setSpeed(speed);
-        this.setMedals(null);
-        this.type = type;
 
-        Random rnd = new Random();
-        this.orientation = Orientation.E;
-        size = 65;
-        maxEnergy = rnd.nextInt(900) + 100;
-        energyPerMeter = rnd.nextInt(10) + 1;
-        currentEnergy = maxEnergy;
-        this.pan = pan;
+        this.setName(name);
+        this.setSpeed(speed);
+        this.setEnergyPerMeter(energyPerMeter);
+        this.setGender(gender);
+        this.setType(type);
+        this.setPan(pan);
+
+        this.setMedals(null);
+        this.setOrientation(Orientation.E);
 
         loadImages(imgChoice);
     }
 
-    /**
-     * Creates Animal object with the given arguments.
-     *
-     * @param name   A given name of Animal object.
-     * @param speed  A given speed of Animal object.
-     * @param medals A given array of Medal objects of Animal object.
-     * @see gen,Medal
-     */
-    public Animal(String name, double speed, String type, Medal[] medals) {
-        super();
-        this.setName(name);
-        this.setGender(gen.Male);
-        this.setWeight(15);
-        this.setSpeed(speed);
-        this.setMedals(medals);
+    public void setOrientation(Orientation orientation) {
+        this.orientation = orientation;
+    }
+
+    public void setType(String type) {
         this.type = type;
     }
 
-    /**
-     * Gets this Animal's object sound.
-     *
-     * @return this object's sound.
-     */
+    public void setPan(CompetitionPanel pan) {
+        this.pan = pan;
+    }
+
     abstract public String getSound();
 
-    /**
-     * Gets this Animal's object name.
-     *
-     * @return this object's name.
-     */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * Gets this Animal's object gender.
-     *
-     * @return this object's gender.
-     */
     public gen getGender() {
         return this.gender;
     }
 
-    /**
-     * Gets this Animal's object weight.
-     *
-     * @return this object's weight.
-     * @see gen
-     */
-    public double getWeight() {
-        return this.weight;
-    }
-
-
-    /**
-     * Gets this Animal's object speed.
-     *
-     * @return this object's speed.
-     */
     public double getSpeed() {
         return this.speed;
     }
 
-    /**
-     * Gets this Animal's object medals.
-     *
-     * @return this object's array of medals objects.
-     * @see Medal
-     */
     public Medal[] getMedals() {
         return medals;
     }
 
-    /**
-     * Sets this Animal's name.
-     *
-     * @param name A given value that is used to initialize this name.
-     * @return A boolean if the name was initialized or not.
-     * @see Medal
-     */
-    protected boolean setName(String name) {
-        if (name != null) {
-            this.name = name;
-            return true;
-        }
-        this.name = "- Empty name - ";
-        return false;
-    }
-
     public abstract String getType();
 
-    /**
-     * Sets this Animal's gender enum.
-     *
-     * @param gender A given enum value that is used to initialize this gender .
-     * @return A boolean if the gender was initialized or not.
-     * @see gen
-     */
-    protected boolean setGender(gen gender) {
-        this.gender = gender;
-        return true;
-    }
-
-    /**
-     * Sets this Animal's weight.
-     *
-     * @param weight A given value that is used to initialize this weight .
-     * @return A boolean if the weight was initialized or not.
-     */
-    protected boolean setWeight(double weight) {
-        if (weight > 0) {
-            this.weight = weight;
-            return true;
+    protected void setName(String name) {
+        if (name != null) {
+            this.name = name;
+            return;
         }
-        this.weight = 0;
-        return false;
+        this.name = "- Empty name - ";
     }
 
-    /**
-     * Sets this Animal's speed.
-     *
-     * @param speed A given value that is used to initialize this speed .
-     * @return A boolean if the speed was initialized or not.
-     */
-    protected boolean setSpeed(double speed) {
+    protected void setGender(gen gender) {
+        this.gender = gender;
+    }
+
+    public void setEnergyPerMeter(int energyPerMeter) {
+        this.energyPerMeter = energyPerMeter;
+    }
+
+    protected void setSpeed(double speed) {
         if (speed > 0) {
             this.speed = speed;
-            return true;
+            return;
         }
         this.speed = 0;
-        return false;
     }
 
     public abstract String[] getAnimalInfo();
 
-    /**
-     * Sets this Animal's array of medals objects.
-     *
-     * @param medals A given array of Medal objects that is used to initialize this medals .
-     * @return A boolean if this medals was initialized or not.
-     * @see Medal
-     */
-    protected boolean setMedals(Medal[] medals) {
+    protected void setMedals(Medal[] medals) {
         if (medals != null) {
             this.medals = medals.clone();
-            return true;
+            return;
         }
         this.medals = null;
-        return false;
     }
 
     /**
@@ -236,7 +146,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
     }
 
     public String toString() {
-        return "Name : " + this.getName() + "\nGender : " + this.getGender() + "\nWeight : " + this.getWeight()
+        return "Name : " + this.getName() + "\nGender : " + this.getGender() + "\nWeight : "
                 + "\nSpeed : " + this.getSpeed() + "\nMedals : " + this.MedalsToString() + "\nLocation : "
                 + super.getPosition();
     }
@@ -246,7 +156,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
      */
     public void makeSound() {
         System.out.println(this.getName() + " said " + getSound());
-    }
+    } //todo -use when animal wins
 
     public void setCurrentEnergy(int Energy) {
         this.currentEnergy = Energy;
@@ -260,10 +170,7 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
             this.northImg = ImageIO.read(getClass().getResource("/" + nm + "N.png"));
             this.southImg = ImageIO.read(getClass().getResource("/" + nm + "S.png"));
 
-//            this.eastImg = ImageIO.read(new File(PICTURE_PATH + nm + "E.png"));
-//            this.westImg = ImageIO.read(new File(PICTURE_PATH + nm + "W.png"));
-//            this.northImg = ImageIO.read(new File(PICTURE_PATH + nm + "N.png"));
-//            this.southImg = ImageIO.read(new File(PICTURE_PATH + nm + "S.png"));
+
         } catch (IOException e) {
             try {
                 System.out.println("reach to catch"); //todo delete line
@@ -300,13 +207,5 @@ public abstract class Animal extends Mobile implements IDrawable, IAnimal, Clone
         }
     }
 
-    private static BufferedImage imageToBufferedImage(Image im) {
-        BufferedImage bi = new BufferedImage
-                (im.getWidth(null), im.getHeight(null), BufferedImage.TYPE_INT_ARGB);
-        Graphics bg = bi.getGraphics();
-        bg.drawImage(im, 0, 0, null);
-        bg.dispose();
-        return bi;
-    }
 }
 
