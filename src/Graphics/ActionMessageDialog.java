@@ -63,4 +63,13 @@ public class ActionMessageDialog {
                 JOptionPane.PLAIN_MESSAGE, imageIcon, options, "Terrestrial animals");
     }
 
+    public static void createAnimalDialogError(CompetitionFrame frame) {
+        //custom title, warning icon
+        JOptionPane.showMessageDialog(frame,
+                "DONT BE LAZY!\nplease choose the gender.",
+                "Animal with no gender ?",
+                JOptionPane.WARNING_MESSAGE);
+    }
+
+
 }

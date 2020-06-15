@@ -44,7 +44,7 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
     private String animalName; // name of animal , example:REX
     private String animalKind; // kind of animal , example: Dog
     private gen gender; //animal's gender
-    private double speed; //animal's speed
+    private int speed; //animal's speed
     private int energyConsumption; // animal's energy consumption
 
     /**
@@ -182,109 +182,105 @@ public class AddAnimalDialog extends JDialog implements ActionListener {
         });
     }
 
-        /**
-         * Detects a preformed action on this frame's components.
-         *
-         * @param e - A given preformed action.
-         */
-        public void actionPerformed (ActionEvent e){
-            Object chosen_action = e.getSource();
+    /**
+     * Detects a preformed action on this frame's components.
+     *
+     * @param e - A given preformed action.
+     */
+    public void actionPerformed(ActionEvent e) {
+        Object chosen_action = e.getSource();
 
-            if (chosen_action == nameTextField)
-                animalName = nameTextField.getText();
-            else if (chosen_action == imageCbox)
-                showImage();
-            else if (chosen_action == maleBtn || chosen_action == femaleBtn || chosen_action == hermaBtn) {
-                gender = gen.valueOf(getSelectedButtonText(buttons));
-            }
-//         else if (chosen_action == createBtn)
-//            if (gender != null)
-//                System.out.println("animal can be created   " + gender);
-//            else
-//                System.out.println("animal can not be created   ");
+        if (chosen_action == nameTextField)
+            animalName = nameTextField.getText();
+        else if (chosen_action == imageCbox)
+            showImage();
+        else if (chosen_action == maleBtn || chosen_action == femaleBtn || chosen_action == hermaBtn) {
+            gender = gen.valueOf(getSelectedButtonText(buttons));
         }
+    }
 
-        public String getSelectedButtonText (ButtonGroup buttonGroup){
-            for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
-                AbstractButton button = buttons.nextElement();
-
-                if (button.isSelected()) {
-                    System.out.println("caught it - its" + button.getText());
-                    return button.getText();
-                }
-            }
-            return null;
+    public String getSelectedButtonText(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements(); ) {
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected())
+                return button.getText();
         }
+        return null;
+    }
 
-        /**
-         * Create the JComboBox option according to user's choice.
-         */
-        private void chooseAddItemsToJcb () {
-            if (animalFamilyType.contains("Terr")) {
-                addItemJcb(terAnimals);
-            } else if (animalFamilyType.contains("Air")) {
-                addItemJcb(airAnimals);
-            } else if (animalFamilyType.contains("Water")) {
-                addItemJcb(waterAnimals);
-            }
+    /**
+     * Create the JComboBox option according to user's choice.
+     */
+    private void chooseAddItemsToJcb() {
+        if (animalFamilyType.contains("Terr")) {
+            addItemJcb(terAnimals);
+        } else if (animalFamilyType.contains("Air")) {
+            addItemJcb(airAnimals);
+        } else if (animalFamilyType.contains("Water")) {
+            addItemJcb(waterAnimals);
         }
+    }
 
-        /**
-         * Shows the image that match the user's choices.
-         */
-        private void showImage () {
-            imgLabel = new JLabel();
-            this.animalKind = (String) imageCbox.getSelectedItem();
-            System.out.println("reached showImage()     " + animalKind);
+    /**
+     * Shows the image that match the user's choices.
+     */
+    private void showImage() {
+        this.animalKind = (String) imageCbox.getSelectedItem();
+        try {
+            ImageIcon imageIcon = new ImageIcon(getClass().getResource("/" + animalKind + "E.png")); // load the image to a imageIcon
+            Image image = imageIcon.getImage(); // transform it
+            Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
+            imageIcon = new ImageIcon(newImg);// transform it back
+            imgLabel.setIcon(imageIcon);
+            this.add(imgLabel, gbc);
 
-            try {
-                ImageIcon imageIcon = new ImageIcon(getClass().getResource("/" + animalKind + "E.png")); // load the image to a imageIcon
-                Image image = imageIcon.getImage(); // transform it
-                Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
-                imageIcon = new ImageIcon(newImg);// transform it back
-                imgLabel.setIcon(imageIcon);
-                this.add(imgLabel, gbc);
-
-                System.out.println(getClass().getResource("/" + animalKind + "E.png"));
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-            validate();
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
+        repaint();
+    }
 
-        /**
-         * Adds the options to the JComboBox.
-         *
-         * @param arr - A given array of options.
-         */
-        public void addItemJcb (String[]arr){
-            for (String s : arr)
-                imageCbox.addItem(s);
-        }
+    /**
+     * Adds the options to the JComboBox.
+     *
+     * @param arr - A given array of options.
+     */
+    public void addItemJcb(String[] arr) {
+        for (String s : arr)
+            imageCbox.addItem(s);
+    }
 
-        public JButton getCreateBtn () {
-            return createBtn;
-        }
+    public JButton getCreateBtn() {
+        return createBtn;
+    }
 
-        public String getAnimalFamilyType () {
-            return animalFamilyType;
-        }
+    public String getAnimalFamilyType() {
+        return animalFamilyType;
+    }
 
-        public String getAnimalName () {
-            return animalName;
-        }
+    public String getAnimalName() {
+        return animalName;
+    }
 
-        public String getAnimalKind () {
-            return animalKind;
-        }
+    public String getAnimalKind() {
+        return animalKind;
+    }
 
-        public double getSpeed () {
-            return speed;
-        }
+    public int getSpeed() {
+        return speed;
+    }
 
-//
-//        public static void main (String[]args){
+    public int getEnergyConsumption() {
+        return energyConsumption;
+    }
+
+    public gen getGender() {
+        return gender;
+    }
+
+
+    //        public static void main (String[]args){
 //            new AddAnimalDialog(new JFrame(), "Add Animal ", "Air animals", "Regular");
 //        }
 
-    }
+}
