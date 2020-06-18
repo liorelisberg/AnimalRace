@@ -92,7 +92,13 @@ public class ActionMessageDialog {
                     f.setVisible(true);
                     ImageIcon imageIcon = new ImageIcon(ActionMessageDialog.class.getResource("/start" + index-- + ".png")); // load the image to a imageIcon
                     Image image = imageIcon.getImage(); // transform it
-                    Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
+
+                    Image newImg = null;
+                    if(index+1 != 0)
+                         newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
+                    else
+                         newImg = image.getScaledInstance(220, 220, Image.SCALE_SMOOTH); // scale it the smooth way
+
                     imageIcon = new ImageIcon(newImg);// transform it back
                     lbl.setIcon(imageIcon);
 //                    b.setIcon(imageIcon);
