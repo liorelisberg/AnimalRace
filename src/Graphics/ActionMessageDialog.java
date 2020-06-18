@@ -81,19 +81,22 @@ public class ActionMessageDialog {
         centreWindow(f);
         JPanel p = new JPanel();
         JLabel lbl = new JLabel();
-        JButton b = new JButton("3");
 
         new java.util.Timer().schedule(new TimerTask() {
             @Override
 
             public void run() {
                 f.add(p);
-                p.add(b);
+                p.add(lbl);
                 if (index >= 0) {
-                    System.out.println(index);
                     f.setVisible(true);
-                    b.setIcon(new ImageIcon(ActionMessageDialog.class.getResource("/start" + index-- + ".png")));
-                    p.validate();
+                    ImageIcon imageIcon = new ImageIcon(ActionMessageDialog.class.getResource("/start" + index-- + ".png")); // load the image to a imageIcon
+                    Image image = imageIcon.getImage(); // transform it
+                    Image newImg = image.getScaledInstance(120, 120, Image.SCALE_SMOOTH); // scale it the smooth way
+                    imageIcon = new ImageIcon(newImg);// transform it back
+                    lbl.setIcon(imageIcon);
+//                    b.setIcon(imageIcon);
+                    p.repaint();
                 } else {
                     cancel();
                     f.dispose();
