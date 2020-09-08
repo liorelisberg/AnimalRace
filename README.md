@@ -21,7 +21,7 @@
 
 ### Step 3
 
-- 🔃 Create a new pull request using <a href="https://github.com/joanaz/HireDot2/compare/" target="_blank">`https://github.com/joanaz/HireDot2/compare/`</a>.
+- 🔃 Create a new pull request using <a href="https://github.com/liorelisberg/AnimalRace/pulls" target="_blank">`https://github.com/liorelisberg/AnimalRace/pulls`</a>.
 
 ---
 
