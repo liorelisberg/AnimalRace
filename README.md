@@ -17,7 +17,7 @@
 
 ### Step 2
 
-- **HACK AWAY!** 🔨🔨🔨
+- **JUST PLAY!** 🔨🔨🔨
 
 ### Step 3
 
